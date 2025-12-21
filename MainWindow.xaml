@@ -1,0 +1,161 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Игра-Бродилка" Height="750" Width="900"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="LightBlue" Padding="10">
+            <StackPanel>
+                <TextBlock Text="Игра-Бродилка" 
+                           FontSize="24" FontWeight="Bold" 
+                           HorizontalAlignment="Center"
+                           Foreground="DarkBlue"/>
+                <TextBlock x:Name="GameModeText" 
+                           Text="Режим: все игроки до финиша" 
+                           FontSize="12" 
+                           HorizontalAlignment="Center"
+                           Foreground="DarkBlue"
+                           Margin="0,5,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <ScrollViewer Grid.Row="1" Margin="10" VerticalScrollBarVisibility="Auto">
+            <WrapPanel x:Name="GameBoardPanel" 
+                       HorizontalAlignment="Center"
+                       Margin="10"/>
+        </ScrollViewer>
+
+        <Border Grid.Row="2" Background="LightGray" Padding="15">
+            <StackPanel>
+                <Border Background="White" 
+                        BorderBrush="Gray" 
+                        BorderThickness="1"
+                        CornerRadius="5"
+                        Padding="10"
+                        Margin="0,0,0,10">
+                    <StackPanel>
+                        <TextBlock Text="Настройки игры:" 
+                                   FontSize="14" FontWeight="Bold"
+                                   Margin="0,0,0,5"/>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                            <TextBlock Text="Кол-во игроков:" 
+                                       VerticalAlignment="Center"
+                                       FontSize="13"
+                                       Width="120"/>
+
+                            <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                                <RadioButton x:Name="Player2Radio" 
+                                             Content="2 игрока" 
+                                             Margin="5,0" 
+                                             GroupName="Players"
+                                             IsChecked="True"/>
+                                <RadioButton x:Name="Player3Radio" 
+                                             Content="3 игрока" 
+                                             Margin="5,0" 
+                                             GroupName="Players"/>
+                                <RadioButton x:Name="Player4Radio" 
+                                             Content="4 игрока" 
+                                             Margin="5,0" 
+                                             GroupName="Players"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                            <TextBlock Text="Размер поля:" 
+                                       VerticalAlignment="Center"
+                                       FontSize="13"
+                                       Width="120"/>
+
+                            <ComboBox x:Name="BoardSizeCombo"
+                                      Width="100"
+                                      Margin="10,0,0,0"
+                                      SelectedIndex="2">
+                                <ComboBoxItem Content="20 ячеек" Tag="20"/>
+                                <ComboBoxItem Content="30 ячеек" Tag="30"/>
+                                <ComboBoxItem Content="40 ячеек" Tag="40"/>
+                                <ComboBoxItem Content="50 ячеек" Tag="50"/>
+                                <ComboBoxItem Content="60 ячеек" Tag="60"/>
+                            </ComboBox>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Center" 
+                            Margin="0,0,0,10">
+                    <TextBlock Text="Текущий игрок: " 
+                               VerticalAlignment="Center"
+                               FontSize="14"/>
+                    <TextBlock x:Name="CurrentPlayerLabel" 
+                               Text="Игрок 1"
+                               VerticalAlignment="Center"
+                               FontSize="14" FontWeight="Bold"
+                               Foreground="Red" Margin="5,0,20,0"/>
+
+                    <TextBlock Text="Кубик: " 
+                               VerticalAlignment="Center"
+                               FontSize="14" Margin="20,0,5,0"/>
+                    <Border Background="White" 
+                            BorderBrush="Black" 
+                            BorderThickness="1"
+                            CornerRadius="3"
+                            Padding="8,3">
+                        <TextBlock x:Name="DiceResultText" 
+                                   Text="-" 
+                                   FontSize="16" FontWeight="Bold"
+                                   HorizontalAlignment="Center"
+                                   MinWidth="30"/>
+                    </Border>
+
+                    <TextBlock x:Name="FinishedPlayersText" 
+                               Text="" 
+                               VerticalAlignment="Center"
+                               FontSize="12"
+                               Margin="20,0,0,0"
+                               Foreground="DarkGreen"
+                               FontWeight="SemiBold"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Center"
+                            Margin="0,10,0,0">
+                    <Button x:Name="RollDiceButton" 
+                            Content="Бросить кубик" 
+                            Width="140" Height="40" Margin="5"
+                            FontSize="14" FontWeight="SemiBold"
+                            Background="LightGreen"
+                            Click="RollDiceButton_Click"/>
+
+                    <Button x:Name="NewGameButton" 
+                            Content="Новая игра" 
+                            Width="140" Height="40" Margin="5"
+                            FontSize="14" FontWeight="SemiBold"
+                            Background="LightSkyBlue"
+                            Click="NewGameButton_Click"/>
+                </StackPanel>
+
+                <Border Background="White" 
+                        BorderBrush="Gray" 
+                        BorderThickness="1"
+                        CornerRadius="5"
+                        Margin="0,15,0,0" 
+                        Padding="10">
+                    <TextBlock x:Name="GameStatusText" 
+                               Text="Настройте параметры и нажмите 'Новая игра'\nРежим: все игроки до финиша"
+                               TextWrapping="Wrap"
+                               HorizontalAlignment="Center"
+                               FontSize="13"/>
+                </Border>
+            </StackPanel>
+        </Border>
+    </Grid>
+
+</Window>
