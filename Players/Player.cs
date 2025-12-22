@@ -48,5 +48,10 @@ namespace WpfApp1
             }
             return true;
         }
+
+        public override string ToString()
+        {
+            return $"{Name}, {Position}, {Color}";
+        }
     }
 }

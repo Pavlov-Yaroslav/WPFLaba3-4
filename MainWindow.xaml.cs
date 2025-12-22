@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.Services;
+using System.Text.Json;
 
 namespace WpfApp1
 {
@@ -230,6 +232,45 @@ namespace WpfApp1
                 {
                     EndGame();
                 }
+            }
+        }
+
+        private void MainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            StartWindow startWindow = new StartWindow();
+            startWindow.Show();
+            Close();
+        }
+
+        private void SaveGame_Click(object sender, RoutedEventArgs e)
+        {
+            SaveGameToFile(gameController);
+        }
+        private void SaveGameToFile(GameController gameController)
+        {
+            if (gameController == null || !gameController.IsGameActive)
+            {
+                MessageBox.Show("Игра ещё не начата", "Ошибка",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            Debug.WriteLine("Не финишировавшие игроки:");
+            foreach (var player in gameController.Players)
+            {
+                Debug.WriteLine(player);
+            }
+
+            Debug.WriteLine("Финишировавшие игроки:");
+            foreach (var finishPlayer in gameController.FinishedPlayers)
+            {
+                Debug.WriteLine(finishPlayer);
+            }
+
+            Debug.WriteLine("Ячейки:");
+            foreach (var cell in gameController.GameBoard.Cells )
+            {
+                Debug.WriteLine(cell);
             }
         }
     }
