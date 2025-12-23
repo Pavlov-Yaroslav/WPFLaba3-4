@@ -34,17 +34,18 @@
                 HorizontalAlignment="Center">
 
             <Button x:Name="New_game" Width="140" Height="40"
-                Content="Новая игра"
+                Content="Играть"
                 FontSize="14"
                 FontWeight="SemiBold"
-                Background="LightSkyBlue" Click="New_game_Click"/>
+                Background="LightSkyBlue" Click="New_game_Click"
+                Margin="15"/>
 
-            <Button x:Name="Continue_game" Width="140" Height="40"
+            <!--<Button x:Name="Continue_game" Width="140" Height="40"
                 Content="Продолжить"
                 FontSize="14"
                 FontWeight="SemiBold"
                 Background="LightSkyBlue"
-                Margin="20"/>
+                Margin="20" IsEnabled="False" Click="Continue_game_Click"/>-->
 
             <Button x:Name="Exit_game" Width="140" Height="40"
                 Content="Выход"

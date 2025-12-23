@@ -26,12 +26,13 @@ namespace WpfApp1
 {
     public partial class MainWindow : Window
     {
-        private GameController gameController = new GameController();
+        private GameController gameController;
         private BoardRenderer boardRenderer = new BoardRenderer();
 
-        public MainWindow()
+        public MainWindow(GameController controller = null)
         {
             InitializeComponent();
+            gameController = controller ?? new GameController();
             GameStatusText.Text = "Настройте параметры и нажмите 'Новая игра'\nВсе игроки должны дойти до финиша";
         }
 
@@ -262,7 +263,6 @@ namespace WpfApp1
                 return;
             }
 
-            Debug.WriteLine("Не финишировавшие игроки:");
             var save = new GameSave
             {
                 Players = gameController.Players.Select(p => new PlayerSave
@@ -285,21 +285,39 @@ namespace WpfApp1
                 }).ToList(),
 
             };
+            SaveService.Save(save);
+        }
 
-            string json = JsonSerializer.Serialize(save, new JsonSerializerOptions
+        private void LoadGameFromFile()
+        {
+            var save = SaveService.Load();
+
+            if (save != null)
             {
-                WriteIndented = true
-            });
+                foreach (var p in save.Players)
+                {
+                    var player = new Player(p.Name, p.Color)
+                    {
+                        Position = p.Position
+                    };
+                    Debug.WriteLine(player);
+                }
+                gameController.ContinueGame(save.Players);
+            }
+        }
 
-            string projectRoot = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", ".."));
+        private void LoadGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            LoadGameFromFile();
 
-            string saveFolder = Path.Combine(projectRoot, "Saves");
-            Directory.CreateDirectory(saveFolder);
+            boardRenderer.RenderBoard(GameBoardPanel, gameController.GameBoard);
+            boardRenderer.UpdatePlayerMarkers(GameBoardPanel, gameController.GameBoard, gameController.Players);
 
-            string path = Path.Combine(saveFolder, "save.json");
+            UpdateGameUI();
 
-            File.WriteAllText(path, json);
+            GameStatusText.Text = $"Игра загрузилась! игрока, поле ячеек\nИгра продолжается до финиша всех игроков!";
 
+            FinishedPlayersText.Text = "";
         }
     }
 }

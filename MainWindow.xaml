@@ -140,6 +140,12 @@
                             FontSize="14" FontWeight="SemiBold"
                             Background="LightSkyBlue"
                             Click="NewGameButton_Click"/>
+                    <Button x:Name="LoadGameButton" 
+                        Content="Загрузить" 
+                        Width="140" Height="40" Margin="5"
+                        FontSize="14" FontWeight="SemiBold"
+                        Background="#FF53B4EF"
+                        Click="LoadGameButton_Click"/>
                     <Button x:Name="SaveGame" 
                          Content="Сохранить игру" 
                          Width="140" Height="40" Margin="5"

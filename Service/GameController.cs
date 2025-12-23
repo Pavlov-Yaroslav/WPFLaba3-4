@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using WpfApp1.GameCore;
 
 namespace WpfApp1.Services
 {
@@ -18,13 +19,6 @@ namespace WpfApp1.Services
         private bool gameActive = false;
         private bool allPlayersMode = true;
 
-        private static readonly Brush[] PlayerColors =
-        {
-            Brushes.Red,
-            Brushes.Blue,
-            Brushes.Green,
-            Brushes.Orange
-        };
 
         private static readonly string[] PlayerColorsString =
         {
@@ -70,6 +64,43 @@ namespace WpfApp1.Services
             {
                 players.Add(new Player($"Игрок {i + 1}", PlayerColorsString[i]));
             }
+            currentPlayerIndex = 0;
+            gameActive = true;
+        }
+
+        public void ContinueGame(List<PlayerSave> loadPlayers)
+        {
+            int playerCount = loadPlayers.Count;
+            int boardSize = 20;
+
+            if (playerCount < 2 || playerCount > 4)
+                throw new ArgumentException("Количество игроков должно быть от 2 до 4");
+
+            if (boardSize < 10 || boardSize > 100)
+                throw new ArgumentException("Размер поля должен быть от 10 до 100 ячеек");
+
+            finishedPlayers.Clear();
+
+            gameBoard = new Board(boardSize);
+
+            int simpleCells = CalculateSimpleCells(boardSize);
+            int forwardCells = CalculateForwardCells(boardSize);
+            int backCells = CalculateBackCells(boardSize);
+            int skipCells = CalculateSkipCells(boardSize);
+
+            boardGenerator.Generate(gameBoard,
+                simpleCells,
+                forwardCells,
+                backCells,
+                skipCells);
+
+            players = new List<Player>();
+
+            players = loadPlayers.Select(p => new Player(p.Name, p.Color)
+            {
+                Position = p.Position,
+            }).ToList();
+
             currentPlayerIndex = 0;
             gameActive = true;
         }

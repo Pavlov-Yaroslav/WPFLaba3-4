@@ -93,6 +93,7 @@
     <Compile Include="Service\BoardRenderer.cs" />
     <Compile Include="Service\BrushHelper.cs" />
     <Compile Include="Service\GameController.cs" />
+    <Compile Include="Service\SaveService.cs" />
     <Compile Include="Settings\DifficultySettings.cs" />
     <Compile Include="Players\Player.cs" />
     <Compile Include="StartWindow.xaml.cs">

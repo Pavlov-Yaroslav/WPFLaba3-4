@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,6 +16,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfApp1.GameCore;
+using WpfApp1.Services;
+using WpfApp1.Service;
+using Path = System.IO.Path;
+
 
 namespace WpfApp1
 {
@@ -30,8 +40,7 @@ namespace WpfApp1
         {
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
-            this.Close();
-
+            Close();
         }
     }
 }
