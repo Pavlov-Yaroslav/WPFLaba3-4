@@ -33,11 +33,5 @@ namespace WpfApp1
                 _cells[index] = cell;
             }
         }
-
-        public bool IsFree(int index)
-        {
-            if (index < 0 || index >= _cells.Length) return false;
-            return _cells[index] == null;
-        }
     }
 }
