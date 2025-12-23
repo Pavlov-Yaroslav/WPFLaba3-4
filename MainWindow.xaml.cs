@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,19 +17,35 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.GameCore;
+using WpfApp1.Service;
 using WpfApp1.Services;
+using Path = System.IO.Path;
 
 namespace WpfApp1
 {
     public partial class MainWindow : Window
     {
-        private GameController gameController = new GameController();
+        private GameController gameController;
         private BoardRenderer boardRenderer = new BoardRenderer();
 
-        public MainWindow()
+        public MainWindow(GameController controller = null)
         {
             InitializeComponent();
+            gameController = controller ?? new GameController();
             GameStatusText.Text = "Настройте параметры и нажмите 'Новая игра'\nВсе игроки должны дойти до финиша";
+        }
+
+        private void RenderGame(int playerCount, int boardSize)
+        { 
+                boardRenderer.RenderBoard(GameBoardPanel, gameController.GameBoard);
+                boardRenderer.UpdatePlayerMarkers(GameBoardPanel, gameController.GameBoard, gameController.Players);
+
+                UpdateGameUI();
+
+                GameStatusText.Text = $"Игра началась! {playerCount} игрока, поле {boardSize} ячеек\nИгра продолжается до финиша всех игроков!";
+
+                FinishedPlayersText.Text = "";
         }
 
         private void NewGameButton_Click(object sender, RoutedEventArgs e)
@@ -36,14 +57,8 @@ namespace WpfApp1
 
                 gameController.StartNewGame(boardSize, playerCount);
 
-                boardRenderer.RenderBoard(GameBoardPanel, gameController.GameBoard);
-                boardRenderer.UpdatePlayerMarkers(GameBoardPanel, gameController.GameBoard, gameController.Players);
+                RenderGame(playerCount, boardSize);
 
-                UpdateGameUI();
-
-                GameStatusText.Text = $"Игра началась! {playerCount} игрока, поле {boardSize} ячеек\nИгра продолжается до финиша всех игроков!";
-
-                FinishedPlayersText.Text = "";
             }
             catch (Exception ex)
             {
@@ -75,6 +90,7 @@ namespace WpfApp1
         {
             RollDiceButton.IsEnabled = true;
             NewGameButton.IsEnabled = false;
+            SaveGame.IsEnabled = true;
 
             Player2Radio.IsEnabled = false;
             Player3Radio.IsEnabled = false;
@@ -85,7 +101,7 @@ namespace WpfApp1
             if (currentPlayer != null)
             {
                 CurrentPlayerLabel.Text = currentPlayer.Name;
-                CurrentPlayerLabel.Foreground = currentPlayer.Color;
+                CurrentPlayerLabel.Foreground = BrushHelper.GetBrush(currentPlayer.Color);
             }
             DiceResultText.Text = "-";
         }
@@ -97,7 +113,8 @@ namespace WpfApp1
                 if (!gameController.IsGameActive)
                     return;
 
-                bool roundEnded = gameController.MakeMove();
+                List<Player> newlyFinishedPlayers;
+                bool roundEnded = gameController.MakePlayerTurn(out newlyFinishedPlayers);
 
                 DiceResultText.Text = gameController.GameDice.Edge.ToString();
 
@@ -116,6 +133,11 @@ namespace WpfApp1
                         ShowIntermediateResults();
                     }
 
+                    if (newlyFinishedPlayers.Count > 0)
+                    {
+                        var names = string.Join(", ", newlyFinishedPlayers.Select(p => p.Name));
+                    }
+
                     return;
                 }
 
@@ -126,6 +148,7 @@ namespace WpfApp1
                 MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка");
             }
         }
+
 
         private void UpdateFinishedPlayersDisplay()
         {
@@ -198,6 +221,7 @@ namespace WpfApp1
 
             RollDiceButton.IsEnabled = false;
             NewGameButton.IsEnabled = true;
+            SaveGame.IsEnabled = false;
 
             Player2Radio.IsEnabled = true;
             Player3Radio.IsEnabled = true;
@@ -216,7 +240,7 @@ namespace WpfApp1
             {
                 GameStatusText.Text = $"Ходит {nextPlayer.Name}";
                 CurrentPlayerLabel.Text = nextPlayer.Name;
-                CurrentPlayerLabel.Foreground = nextPlayer.Color;
+                CurrentPlayerLabel.Foreground = BrushHelper.GetBrush(nextPlayer.Color);
 
                 int finishedCount = gameController.FinishedPlayers.Count;
                 if (finishedCount > 0)
@@ -230,6 +254,91 @@ namespace WpfApp1
                 {
                     EndGame();
                 }
+            }
+        }
+
+        private void MainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            StartWindow startWindow = new StartWindow();
+            startWindow.Show();
+            Close();
+        }
+
+        private void SaveGame_Click(object sender, RoutedEventArgs e)
+        {
+            SaveGameToFile(gameController);
+        }
+        private void SaveGameToFile(GameController gameController)
+        {
+            if (gameController == null || !gameController.IsGameActive)
+            {
+                MessageBox.Show("Игра ещё не начата", "Ошибка",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var save = new GameSave
+            {
+                Players = gameController.Players.Select(p => new PlayerSave
+                {
+                    Name = p.Name,
+                    Position = p.Position,
+                    Color = p.Color,
+                    EffectsTypes = p.Effects
+                        .Select(e => e.GetType().Name)
+                        .ToList()
+                }).ToList(),
+
+                CellSaves = gameController.GameBoard.Cells.Select(s => new CellSave
+                {
+                    Type = s.GetType().Name,
+                }).ToList(),
+
+                FinishedPlayers = gameController.FinishedPlayers
+                    .Select(f => new FinishedPlayerSave
+                    {
+                        PlayerName = f.Player.Name,
+                        FinishRound = f.FinishRound
+                    }).ToList(),
+
+                CurrentPlayerIndex = gameController.CurrentPlayerIndex,
+                RoundMoveCounter = gameController.RoundMoveCounter,
+                RoundActivePlayersCount = gameController.RoundActivePlayersCount,
+                CurrentRound = gameController.CurrentRound,
+
+                SizeBoard = gameController.GameBoard.Size,
+
+            };
+            SaveService.Save(save);
+        }
+
+        private void LoadGameFromFile()
+        {
+            var save = SaveService.Load();
+
+            if (save == null)
+                return;
+
+            gameController.LoadGame(save);
+
+            boardRenderer.UpdatePlayerMarkers(
+                GameBoardPanel,
+                gameController.GameBoard,
+                gameController.Players
+            );
+            RenderGame(gameController.Players.Count, gameController.GameBoard.Size);
+        }
+
+
+        private void LoadGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                LoadGameFromFile();
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка");
             }
         }
     }

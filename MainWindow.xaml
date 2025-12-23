@@ -140,6 +140,24 @@
                             FontSize="14" FontWeight="SemiBold"
                             Background="LightSkyBlue"
                             Click="NewGameButton_Click"/>
+                    <Button x:Name="LoadGameButton" 
+                        Content="Загрузить" 
+                        Width="140" Height="40" Margin="5"
+                        FontSize="14" FontWeight="SemiBold"
+                        Background="#FF53B4EF"
+                        Click="LoadGameButton_Click"/>
+                    <Button x:Name="SaveGame" 
+                         Content="Сохранить игру" 
+                         Width="140" Height="40" Margin="5"
+                         FontSize="14" FontWeight="SemiBold"
+                         Background="#FF71B7E4"
+                         Click="SaveGame_Click" IsEnabled="False"/>
+                    <Button x:Name="MainMenu" 
+                         Content="Главное меню" 
+                         Width="140" Height="40" Margin="5"
+                         FontSize="14" FontWeight="SemiBold"
+                         Background="#FFEF8271"
+                         Click="MainMenu_Click"/> 
                 </StackPanel>
 
                 <Border Background="White" 

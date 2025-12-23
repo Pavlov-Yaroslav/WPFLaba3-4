@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using WpfApp1.Service;
 
 namespace WpfApp1.Services
 {
@@ -125,7 +127,7 @@ namespace WpfApp1.Services
                 {
                     Width = 15,
                     Height = 15,
-                    Fill = players[0].Color,
+                    Fill = BrushHelper.GetBrush(players[0].Color),
                     Stroke = Brushes.Black,
                     StrokeThickness = 1,
                     HorizontalAlignment = HorizontalAlignment.Center,
@@ -149,7 +151,7 @@ namespace WpfApp1.Services
                     {
                         Width = 10,
                         Height = 10,
-                        Fill = player.Color,
+                        Fill = BrushHelper.GetBrush(player.Color),
                         Stroke = Brushes.Black,
                         StrokeThickness = 0.5,
                         Margin = new Thickness(1)

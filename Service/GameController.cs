@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
+using WpfApp1.GameCore;
+using WpfApp1.Players;
+using WpfApp1.Service;
 
 namespace WpfApp1.Services
 {
@@ -12,37 +12,45 @@ namespace WpfApp1.Services
         private Board gameBoard;
         private BoardGenerator boardGenerator = new BoardGenerator();
         private List<Player> players;
-        private List<Player> finishedPlayers = new List<Player>();
+        private List<FinishedPlayerInfo> finishedPlayers = new List<FinishedPlayerInfo>();
+        private List<Player> finishedThisRound = new List<Player>();
         private Dice dice = new Dice();
-        private int currentPlayerIndex = 0;
         private bool gameActive = false;
-        private bool allPlayersMode = true;
 
-        private static readonly Brush[] PlayerColors =
+        public int CurrentPlayerIndex { get; set; } = 0;
+        public int RoundMoveCounter { get; set; } = 0;
+        public int RoundActivePlayersCount { get; set; } = 0;
+        public int CurrentRound { get; set; } = 1;
+
+        private static readonly string[] PlayerColorsString = { "Red", "Blue", "Green", "Orange" };
+
+        private static readonly Dictionary<string, Func<ICell>> CellFactory = new Dictionary<string, Func<ICell>>
         {
-            Brushes.Red,
-            Brushes.Blue,
-            Brushes.Green,
-            Brushes.Orange
+            { nameof(SimpleCell), () => new SimpleCell() },
+            { nameof(ForwardCell), () => new ForwardCell() },
+            { nameof(BackCell), () => new BackCell() },
+            { nameof(SkipCell), () => new SkipCell() },
         };
 
         public bool IsGameActive => gameActive;
         public Player CurrentPlayer => GetNextActivePlayer();
         public Board GameBoard => gameBoard;
         public List<Player> Players => players;
-        public List<Player> FinishedPlayers => finishedPlayers;
+        public List<FinishedPlayerInfo> FinishedPlayers => finishedPlayers;
         public Dice GameDice => dice;
         public bool AllPlayersFinished => finishedPlayers.Count == players?.Count;
 
         public void StartNewGame(int boardSize = 40, int playerCount = 2)
         {
-            if (playerCount < 2 || playerCount > 4)
-                throw new ArgumentException("Количество игроков должно быть от 2 до 4");
-
-            if (boardSize < 10 || boardSize > 100)
-                throw new ArgumentException("Размер поля должен быть от 10 до 100 ячеек");
+            if (playerCount < 2 || playerCount > 4) throw new ArgumentException("Количество игроков должно быть от 2 до 4");
+            if (boardSize < 10 || boardSize > 100) throw new ArgumentException("Размер поля должен быть от 10 до 100 ячеек");
 
             finishedPlayers.Clear();
+            finishedThisRound.Clear();
+            CurrentPlayerIndex = 0;
+            RoundMoveCounter = 0;
+            RoundActivePlayersCount = 0;
+            CurrentRound = 1;
 
             gameBoard = new Board(boardSize);
 
@@ -51,107 +59,147 @@ namespace WpfApp1.Services
             int backCells = CalculateBackCells(boardSize);
             int skipCells = CalculateSkipCells(boardSize);
 
-            boardGenerator.Generate(gameBoard,
-                simpleCells,
-                forwardCells,
-                backCells,
-                skipCells);
+            boardGenerator.Generate(gameBoard, simpleCells, forwardCells, backCells, skipCells);
 
             players = new List<Player>();
             for (int i = 0; i < playerCount; i++)
-            {
-                players.Add(new Player($"Игрок {i + 1}", PlayerColors[i]));
-            }
-            currentPlayerIndex = 0;
+                players.Add(new Player($"Игрок {i + 1}", PlayerColorsString[i]));
+
             gameActive = true;
         }
 
-        private int CalculateSimpleCells(int boardSize)
+        public void LoadGame(GameSave save)
         {
-            return (int)(boardSize * 0.6);
-        }
+            if (save == null) throw new ArgumentNullException(nameof(save));
 
-        private int CalculateForwardCells(int boardSize)
-        {
-            return (int)(boardSize * 0.2);
-        }
+            finishedPlayers.Clear();
+            finishedThisRound.Clear();
 
-        private int CalculateBackCells(int boardSize)
-        {
-            return (int)(boardSize * 0.1);
-        }
-
-        private int CalculateSkipCells(int boardSize)
-        {
-            return (int)(boardSize * 0.1);
-        }
-
-        public bool MakeMove()
-        {
-            if (!gameActive || players == null)
-                return false;
-
-            var currentPlayer = GetNextActivePlayer();
-            if (currentPlayer == null)
+            gameBoard = new Board(save.SizeBoard);
+            for (int i = 0; i < save.CellSaves.Count; i++)
             {
-                gameActive = false;
-                return true;
+                var type = save.CellSaves[i].Type;
+                gameBoard.Cells[i] = CellFactory.TryGetValue(type, out var constructor) ? constructor() : null;
             }
 
-            dice.Roll();
+            players = save.Players.Select(p => new Player(p.Name, p.Color) { Position = p.Position }).ToList();
 
-            bool playerWon = currentPlayer.MakeMove(gameBoard.Cells, dice);
-
-            if (playerWon)
+            foreach (var pSave in save.Players)
             {
-                currentPlayer.Position = gameBoard.Size - 1;
-                if (!finishedPlayers.Contains(currentPlayer))
+                var player = players.First(p => p.Name == pSave.Name);
+                foreach (var effectType in pSave.EffectsTypes)
                 {
-                    finishedPlayers.Add(currentPlayer);
+                    var effect = PlayerEffectFactory.Create(effectType);
+                    if (effect != null) player.AddEffect(effect);
                 }
+            }
 
-                if (AllPlayersFinished)
-                {
-                    gameActive = false;
-                    return true;
-                }
+            foreach (var f in save.FinishedPlayers)
+            {
+                var player = players.First(p => p.Name == f.PlayerName);
+                finishedPlayers.Add(new FinishedPlayerInfo { Player = player, FinishRound = f.FinishRound });
+            }
+
+            RoundMoveCounter = save.RoundMoveCounter;
+            RoundActivePlayersCount = save.RoundActivePlayersCount;
+            CurrentRound = save.CurrentRound;
+
+            CurrentPlayerIndex = save.CurrentPlayerIndex;
+            var nextActive = GetNextActivePlayer();
+            if (nextActive != null)
+                CurrentPlayerIndex = players.IndexOf(nextActive);
+
+            gameActive = true;
+        }
+
+
+        private int CalculateSimpleCells(int boardSize) => (int)(boardSize * 0.6);
+        private int CalculateForwardCells(int boardSize) => (int)(boardSize * 0.2);
+        private int CalculateBackCells(int boardSize) => (int)(boardSize * 0.1);
+        private int CalculateSkipCells(int boardSize) => (int)(boardSize * 0.1);
+
+        public bool MakePlayerTurn(out List<Player> newlyFinishedPlayers)
+        {
+            newlyFinishedPlayers = new List<Player>();
+            var player = GetNextActivePlayer();
+            if (player == null) return false;
+
+            if (RoundActivePlayersCount == 0)
+                RoundActivePlayersCount = players.Count - finishedPlayers.Count;
+
+            dice.Roll();
+            bool finished = MakePlayerMove(player);
+
+            if (finished && !finishedPlayers.Any(f => f.Player == player))
+            {
+                finishedThisRound.Add(player);
+                newlyFinishedPlayers.Add(player);
             }
 
             MoveToNextActivePlayer();
+            RoundMoveCounter++;
 
-            return false;
+            if (IsRoundFinished())
+                EndRound();
+
+            return finished;
+        }
+
+        public bool IsRoundFinished() => RoundActivePlayersCount > 0 && RoundMoveCounter >= RoundActivePlayersCount;
+
+        private void EndRound()
+        {
+            foreach (var p in finishedThisRound)
+            {
+                if (!finishedPlayers.Any(f => f.Player == p))
+                    finishedPlayers.Add(new FinishedPlayerInfo { Player = p, FinishRound = CurrentRound });
+            }
+
+            finishedThisRound.Clear();
+            RoundMoveCounter = 0;
+            RoundActivePlayersCount = players.Count - finishedPlayers.Count;
+            if (RoundActivePlayersCount < 0) RoundActivePlayersCount = 0;
+            CurrentRound++;
+        }
+
+        private bool MakePlayerMove(Player player)
+        {
+            if (!player.CanMove()) return false;
+
+            player.MoveBy(dice.Edge);
+
+            if (player.Position >= gameBoard.Size) return true;
+
+            var cell = gameBoard.Cells[player.Position];
+            var result = cell?.Resolve();
+            if (result != null) player.ApplyCellResult(result);
+
+            return player.Position >= gameBoard.Size;
         }
 
         private Player GetNextActivePlayer()
         {
-            if (players == null || players.Count == 0)
-                return null;
-
+            if (players == null || players.Count == 0) return null;
             for (int i = 0; i < players.Count; i++)
             {
-                int index = (currentPlayerIndex + i) % players.Count;
+                int index = (CurrentPlayerIndex + i) % players.Count;
                 var player = players[index];
-                if (!finishedPlayers.Contains(player))
-                {
-                    return player;
-                }
+                if (!finishedPlayers.Any(f => f.Player == player)) return player;
             }
-
             return null;
         }
 
         private void MoveToNextActivePlayer()
         {
-            if (players == null || players.Count == 0)
-                return;
+            if (players == null || players.Count == 0) return;
 
             for (int i = 1; i <= players.Count; i++)
             {
-                int nextIndex = (currentPlayerIndex + i) % players.Count;
+                int nextIndex = (CurrentPlayerIndex + i) % players.Count;
                 var nextPlayer = players[nextIndex];
-                if (!finishedPlayers.Contains(nextPlayer))
+                if (!finishedPlayers.Any(f => f.Player == nextPlayer))
                 {
-                    currentPlayerIndex = nextIndex;
+                    CurrentPlayerIndex = nextIndex;
                     return;
                 }
             }
@@ -160,32 +208,33 @@ namespace WpfApp1.Services
         public List<string> GetResults()
         {
             var results = new List<string>();
+            var groupedByRound = finishedPlayers
+                .OrderBy(f => f.FinishRound)
+                .GroupBy(f => f.FinishRound);
 
-            for (int i = 0; i < finishedPlayers.Count; i++)
+            int place = 1;
+            foreach (var group in groupedByRound)
             {
-                results.Add($"{i + 1} место: {finishedPlayers[i].Name}");
-            }
-
-            var remainingPlayers = players.Where(p => !finishedPlayers.Contains(p)).ToList();
-            foreach (var player in remainingPlayers)
-            {
-                results.Add($"В игре: {player.Name} (позиция: {player.Position + 1})");
+                foreach (var info in group)
+                    results.Add($"{place} место: {info.Player.Name}");
+                place += group.Count();
             }
 
             return results;
         }
 
-        public void EndGame()
-        {
-            gameActive = false;
-        }
+        public void EndGame() => gameActive = false;
 
         public void ResetGame()
         {
             gameBoard = null;
             players = null;
             finishedPlayers.Clear();
-            currentPlayerIndex = 0;
+            finishedThisRound.Clear();
+            CurrentPlayerIndex = 0;
+            RoundMoveCounter = 0;
+            RoundActivePlayersCount = 0;
+            CurrentRound = 1;
             gameActive = false;
         }
     }
