@@ -90,6 +90,7 @@
     <Compile Include="GameCore\Board.cs" />
     <Compile Include="GameCore\BoardGenerator.cs" />
     <Compile Include="GameCore\Dice.cs" />
+    <Compile Include="Players\EffectFactory.cs" />
     <Compile Include="Players\IPlayerEffect.cs" />
     <Compile Include="Players\SkipTurnEffect.cs" />
     <Compile Include="Service\FinishPlayerInfo.cs" />

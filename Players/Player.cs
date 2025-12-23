@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Media.Effects;
 using WpfApp1.Cells;
+using WpfApp1.GameCore;
 using WpfApp1.Players;
 
 public class Player
@@ -8,7 +11,7 @@ public class Player
     public string Name { get; set; }
     public string Color { get; set; }
 
-    private readonly List<IPlayerEffect> effects = new List<IPlayerEffect>();
+    public List<IPlayerEffect> Effects = new List<IPlayerEffect>();
 
     public Player(string name, string color)
     {
@@ -32,14 +35,14 @@ public class Player
 
     public void AddEffect(IPlayerEffect effect)
     {
-        effects.Add(effect);
+        Effects.Add(effect);
     }
 
     public bool CanMove()
     {
         bool canMove = true;
 
-        foreach (var effect in effects)
+        foreach (var effect in Effects)
         {
             if (!effect.CanPlayerMove(this))
                 canMove = false;
@@ -47,11 +50,7 @@ public class Player
             effect.OnTurnPassed();
         }
 
-        effects.RemoveAll(e => e.IsExpired);
+        Effects.RemoveAll(e => e.IsExpired);
         return canMove;
-    }
-    public override string ToString()
-    {
-        return $"{Name}, {Position}, {Color}";
     }
 }
