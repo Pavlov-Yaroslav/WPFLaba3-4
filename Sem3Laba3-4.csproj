@@ -85,10 +85,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Cells\CellEffectResult.cs" />
     <Compile Include="Cells\Cells.cs" />
     <Compile Include="GameCore\Board.cs" />
     <Compile Include="GameCore\BoardGenerator.cs" />
     <Compile Include="GameCore\Dice.cs" />
+    <Compile Include="Players\IPlayerEffect.cs" />
+    <Compile Include="Players\SkipTurnEffect.cs" />
+    <Compile Include="Service\FinishPlayerInfo.cs" />
     <Compile Include="Service\GameSave.cs" />
     <Compile Include="Service\BoardRenderer.cs" />
     <Compile Include="Service\BrushHelper.cs" />

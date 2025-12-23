@@ -107,7 +107,7 @@ namespace WpfApp1
                 if (!gameController.IsGameActive)
                     return;
 
-                bool roundEnded = gameController.MakeMove();
+                bool roundEnded = gameController.MakePlayerTurn();
 
                 DiceResultText.Text = gameController.GameDice.Edge.ToString();
 
@@ -277,12 +277,12 @@ namespace WpfApp1
                     Type = s.GetType().Name,
                 }).ToList(),
 
-                FinishPlayers = gameController.FinishedPlayers.Select(f => new PlayerSave 
-                {
-                    Name = f.Name,
-                    Position = f.Position,
-                    Color = f.Color
-                }).ToList(),
+                //FinishPlayers = gameController.FinishedPlayers.Select(f => new PlayerSave 
+                //{
+                //    Name = f.Name,
+                //    Position = f.Position,
+                //    Color = f.Color
+                //}).ToList(),
 
             };
             SaveService.Save(save);

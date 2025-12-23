@@ -1,57 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Collections.Generic;
+using WpfApp1.Cells;
+using WpfApp1.Players;
 
-namespace WpfApp1
+public class Player
 {
-    public class Player
+    public int Position { get; set; }
+    public string Name { get; set; }
+    public string Color { get; set; }
+
+    private readonly List<IPlayerEffect> effects = new List<IPlayerEffect>();
+
+    public Player(string name, string color)
     {
-        public int Position { get; set; }
-        public string Name { get; set; }
-        public string Color { get; set; }
+        Name = name;
+        Color = color;
+        Position = 0;
+    }
 
-        public Player(string name, string color)
+    public void MoveBy(int delta)
+    {
+        Position += delta;
+    }
+
+    public void ApplyCellResult(CellEffectResult result)
+    {
+        Position += result.PositionDelta;
+
+        foreach (var effect in result.Effects)
+            AddEffect(effect);
+    }
+
+    public void AddEffect(IPlayerEffect effect)
+    {
+        effects.Add(effect);
+    }
+
+    public bool CanMove()
+    {
+        bool canMove = true;
+
+        foreach (var effect in effects)
         {
-            Position = 0;
-            Name = name;
-            Color = color;
+            if (!effect.CanPlayerMove(this))
+                canMove = false;
+
+            effect.OnTurnPassed();
         }
 
-        public bool MakeMove(ICell[] cells, Dice dice)
-        {
-            dice.Roll();
-            Position += dice.Edge;
-
-            if (Position >= 0 && Position < cells.Length)
-            {
-                var cell = cells[Position];
-                if (cell != null)
-                {
-                    Position += cell.Action();
-                }
-
-                if (Position < 0) Position = 0;
-                if (Position >= cells.Length) return true;
-
-                return false;
-            }
-            return true;
-        }
-
-        public override string ToString()
-        {
-            return $"{Name}, {Position}, {Color}";
-        }
+        effects.RemoveAll(e => e.IsExpired);
+        return canMove;
+    }
+    public override string ToString()
+    {
+        return $"{Name}, {Position}, {Color}";
     }
 }

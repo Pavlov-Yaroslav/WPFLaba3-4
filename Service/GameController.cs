@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using WpfApp1.GameCore;
+using WpfApp1.Service;
 
 namespace WpfApp1.Services
 {
@@ -13,11 +14,14 @@ namespace WpfApp1.Services
         private Board gameBoard;
         private BoardGenerator boardGenerator = new BoardGenerator();
         private List<Player> players;
-        private List<Player> finishedPlayers = new List<Player>();
+        private List<FinishedPlayerInfo> finishedPlayers = new List<FinishedPlayerInfo>();
+        private List<Player> finishedThisRound = new List<Player>();
         private Dice dice = new Dice();
         private int currentPlayerIndex = 0;
         private bool gameActive = false;
-        private bool allPlayersMode = true;
+        private int roundMoveCounter = 0;
+        private int roundActivePlayersCount = 0;
+        private int currentRound = 1;
 
 
         private static readonly string[] PlayerColorsString =
@@ -32,7 +36,7 @@ namespace WpfApp1.Services
         public Player CurrentPlayer => GetNextActivePlayer();
         public Board GameBoard => gameBoard;
         public List<Player> Players => players;
-        public List<Player> FinishedPlayers => finishedPlayers;
+        public List<FinishedPlayerInfo> FinishedPlayers => finishedPlayers;
         public Dice GameDice => dice;
         public bool AllPlayersFinished => finishedPlayers.Count == players?.Count;
 
@@ -45,6 +49,10 @@ namespace WpfApp1.Services
                 throw new ArgumentException("Размер поля должен быть от 10 до 100 ячеек");
 
             finishedPlayers.Clear();
+            finishedThisRound.Clear();
+            roundMoveCounter = 0;
+            roundActivePlayersCount = 0;
+            currentRound = 1;
 
             gameBoard = new Board(boardSize);
 
@@ -80,6 +88,10 @@ namespace WpfApp1.Services
                 throw new ArgumentException("Размер поля должен быть от 10 до 100 ячеек");
 
             finishedPlayers.Clear();
+            finishedThisRound.Clear();
+            roundMoveCounter = 0;
+            roundActivePlayersCount = 0;
+            currentRound = 1;
 
             gameBoard = new Board(boardSize);
 
@@ -93,8 +105,6 @@ namespace WpfApp1.Services
                 forwardCells,
                 backCells,
                 skipCells);
-
-            players = new List<Player>();
 
             players = loadPlayers.Select(p => new Player(p.Name, p.Color)
             {
@@ -125,55 +135,88 @@ namespace WpfApp1.Services
             return (int)(boardSize * 0.1);
         }
 
-        public bool MakeMove()
+        public bool MakePlayerTurn()
         {
-            if (!gameActive || players == null)
+            var player = GetNextActivePlayer();
+            if (player == null)
                 return false;
 
-            var currentPlayer = GetNextActivePlayer();
-            if (currentPlayer == null)
+            if (roundActivePlayersCount == 0)
             {
-                gameActive = false;
-                return true;
+                roundActivePlayersCount = players.Count - finishedPlayers.Count;
+                if (roundActivePlayersCount < 0) roundActivePlayersCount = 0;
             }
 
             dice.Roll();
 
-            bool playerWon = currentPlayer.MakeMove(gameBoard.Cells, dice);
+            bool finished = MakePlayerMove(player);
 
-            if (playerWon)
+            if (finished && !finishedPlayers.Any(f => f.Player == player))
             {
-                currentPlayer.Position = gameBoard.Size - 1;
-                if (!finishedPlayers.Contains(currentPlayer))
+                var finishedInfo = new FinishedPlayerInfo
                 {
-                    finishedPlayers.Add(currentPlayer);
-                }
-
-                if (AllPlayersFinished)
-                {
-                    gameActive = false;
-                    return true;
-                }
+                    Player = player,
+                    FinishRound = currentRound
+                };
+                finishedPlayers.Add(finishedInfo);
+                finishedThisRound.Add(player);
             }
 
             MoveToNextActivePlayer();
+            roundMoveCounter++;
 
-            return false;
+            if (IsRoundFinished())
+            {
+                EndRound();
+            }
+
+            return finished;
         }
+
+
+        public bool IsRoundFinished()
+        {
+            return roundActivePlayersCount > 0 && roundMoveCounter >= roundActivePlayersCount;
+        }
+
+        public void EndRound()
+        {
+            finishedThisRound.Clear();
+            roundMoveCounter = 0;
+            currentRound++;
+            roundActivePlayersCount = players.Count - finishedPlayers.Count;
+            if (roundActivePlayersCount < 0) roundActivePlayersCount = 0;
+        }
+
+        private bool MakePlayerMove(Player player)
+        {
+            if (!player.CanMove()) return false;
+
+            player.MoveBy(dice.Edge);
+
+            if (player.Position >= gameBoard.Size)
+                return true;
+
+            var cell = gameBoard.Cells[player.Position];
+            var result = cell?.Resolve();
+            if (result != null)
+                player.ApplyCellResult(result);
+
+            return player.Position >= gameBoard.Size;
+        }
+
+
 
         private Player GetNextActivePlayer()
         {
-            if (players == null || players.Count == 0)
-                return null;
+            if (players == null || players.Count == 0) return null;
 
             for (int i = 0; i < players.Count; i++)
             {
                 int index = (currentPlayerIndex + i) % players.Count;
                 var player = players[index];
-                if (!finishedPlayers.Contains(player))
-                {
+                if (!finishedPlayers.Any(f => f.Player == player))
                     return player;
-                }
             }
 
             return null;
@@ -181,14 +224,13 @@ namespace WpfApp1.Services
 
         private void MoveToNextActivePlayer()
         {
-            if (players == null || players.Count == 0)
-                return;
+            if (players == null || players.Count == 0) return;
 
             for (int i = 1; i <= players.Count; i++)
             {
                 int nextIndex = (currentPlayerIndex + i) % players.Count;
                 var nextPlayer = players[nextIndex];
-                if (!finishedPlayers.Contains(nextPlayer))
+                if (!finishedPlayers.Any(f => f.Player == nextPlayer))
                 {
                     currentPlayerIndex = nextIndex;
                     return;
@@ -196,23 +238,31 @@ namespace WpfApp1.Services
             }
         }
 
+
         public List<string> GetResults()
         {
             var results = new List<string>();
 
-            for (int i = 0; i < finishedPlayers.Count; i++)
-            {
-                results.Add($"{i + 1} место: {finishedPlayers[i].Name}");
-            }
+            var groupedByRound = finishedPlayers
+                .OrderBy(f => f.FinishRound)
+                .GroupBy(f => f.FinishRound)
+                .ToList();
 
-            var remainingPlayers = players.Where(p => !finishedPlayers.Contains(p)).ToList();
-            foreach (var player in remainingPlayers)
+            int place = 1;
+
+            foreach (var group in groupedByRound)
             {
-                results.Add($"В игре: {player.Name} (позиция: {player.Position + 1})");
+                foreach (var info in group)
+                {
+                    results.Add($"{place} место: {info.Player.Name}");
+                }
+                place += group.Count();
             }
 
             return results;
         }
+
+
 
         public void EndGame()
         {
@@ -224,7 +274,11 @@ namespace WpfApp1.Services
             gameBoard = null;
             players = null;
             finishedPlayers.Clear();
+            finishedThisRound.Clear();
             currentPlayerIndex = 0;
+            roundMoveCounter = 0;
+            roundActivePlayersCount = 0;
+            currentRound = 1;
             gameActive = false;
         }
     }
