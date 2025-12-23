@@ -1,0 +1,137 @@
+{
+  "Players": [
+    {
+      "Name": "\u0418\u0433\u0440\u043E\u043A 1",
+      "Position": 6,
+      "Color": "Red"
+    },
+    {
+      "Name": "\u0418\u0433\u0440\u043E\u043A 2",
+      "Position": 0,
+      "Color": "Blue"
+    }
+  ],
+  "CellSaves": [
+    {
+      "Type": "SimpleCell"
+    },
+    {
+      "Type": "SimpleCell"
+    },
+    {
+      "Type": "ForwardCell"
+    },
+    {
+      "Type": "SimpleCell"
+    },
+    {
+      "Type": "ForwardCell"
+    },
+    {
+      "Type": "ForwardCell"
+    },
+    {
+      "Type": "ForwardCell"
+    },
+    {
+      "Type": "ForwardCell"
+    },
+    {
+      "Type": "BackCell"
+    },
+    {
+      "Type": "SimpleCell"
+    },
+    {
+      "Type": "SimpleCell"
+    },
+    {
+      "Type": "SimpleCell"
+    },
+    {
+      "Type": "SimpleCell"
+    },
+    {
+      "Type": "SimpleCell"
+    },
+    {
+      "Type": "SimpleCell"
+    },
+    {
+      "Type": "SimpleCell"
+    },
+    {
+      "Type": "SimpleCell"
+    },
+    {
+      "Type": "SimpleCell"
+    },
+    {
+      "Type": "BackCell"
+    },
+    {
+      "Type": "SimpleCell"
+    },
+    {
+      "Type": "SimpleCell"
+    },
+    {
+      "Type": "ForwardCell"
+    },
+    {
+      "Type": "SkipCell"
+    },
+    {
+      "Type": "SkipCell"
+    },
+    {
+      "Type": "SimpleCell"
+    },
+    {
+      "Type": "ForwardCell"
+    },
+    {
+      "Type": "BackCell"
+    },
+    {
+      "Type": "SimpleCell"
+    },
+    {
+      "Type": "ForwardCell"
+    },
+    {
+      "Type": "SimpleCell"
+    },
+    {
+      "Type": "SimpleCell"
+    },
+    {
+      "Type": "BackCell"
+    },
+    {
+      "Type": "SimpleCell"
+    },
+    {
+      "Type": "SimpleCell"
+    },
+    {
+      "Type": "SimpleCell"
+    },
+    {
+      "Type": "SimpleCell"
+    },
+    {
+      "Type": "SkipCell"
+    },
+    {
+      "Type": "SkipCell"
+    },
+    {
+      "Type": "SimpleCell"
+    },
+    {
+      "Type": "SimpleCell"
+    }
+  ],
+  "FinishPlayers": []
+}

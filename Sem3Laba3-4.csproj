@@ -89,6 +89,7 @@
     <Compile Include="GameCore\Board.cs" />
     <Compile Include="GameCore\BoardGenerator.cs" />
     <Compile Include="GameCore\Dice.cs" />
+    <Compile Include="Service\GameSave.cs" />
     <Compile Include="Service\BoardRenderer.cs" />
     <Compile Include="Service\BrushHelper.cs" />
     <Compile Include="Service\GameController.cs" />
@@ -137,6 +138,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Saves\save.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

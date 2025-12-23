@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -16,8 +17,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.GameCore;
 using WpfApp1.Service;
 using WpfApp1.Services;
+using Path = System.IO.Path;
 
 namespace WpfApp1
 {
@@ -260,22 +263,43 @@ namespace WpfApp1
             }
 
             Debug.WriteLine("Не финишировавшие игроки:");
-            foreach (var player in gameController.Players)
+            var save = new GameSave
             {
-                var playerJSON = JsonSerializer.Serialize(player);
-            }
+                Players = gameController.Players.Select(p => new PlayerSave
+                {
+                    Name = p.Name,
+                    Position = p.Position,
+                    Color = p.Color
+                }).ToList(),
 
-            Debug.WriteLine("Финишировавшие игроки:");
-            foreach (var finishPlayer in gameController.FinishedPlayers)
-            {
-                Debug.WriteLine(finishPlayer);
-            }
+                CellSaves = gameController.GameBoard.Cells.Select(s => new CellSave
+                {
+                    Type = s.GetType().Name,
+                }).ToList(),
 
-            Debug.WriteLine("Ячейки:");
-            foreach (var cell in gameController.GameBoard.Cells )
+                FinishPlayers = gameController.FinishedPlayers.Select(f => new PlayerSave 
+                {
+                    Name = f.Name,
+                    Position = f.Position,
+                    Color = f.Color
+                }).ToList(),
+
+            };
+
+            string json = JsonSerializer.Serialize(save, new JsonSerializerOptions
             {
-                Debug.WriteLine(cell);
-            }
+                WriteIndented = true
+            });
+
+            string projectRoot = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", ".."));
+
+            string saveFolder = Path.Combine(projectRoot, "Saves");
+            Directory.CreateDirectory(saveFolder);
+
+            string path = Path.Combine(saveFolder, "save.json");
+
+            File.WriteAllText(path, json);
+
         }
     }
 }
