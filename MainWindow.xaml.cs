@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,8 +16,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.Service;
 using WpfApp1.Services;
-using System.Text.Json;
 
 namespace WpfApp1
 {
@@ -77,6 +80,7 @@ namespace WpfApp1
         {
             RollDiceButton.IsEnabled = true;
             NewGameButton.IsEnabled = false;
+            SaveGame.IsEnabled = true;
 
             Player2Radio.IsEnabled = false;
             Player3Radio.IsEnabled = false;
@@ -87,7 +91,7 @@ namespace WpfApp1
             if (currentPlayer != null)
             {
                 CurrentPlayerLabel.Text = currentPlayer.Name;
-                CurrentPlayerLabel.Foreground = currentPlayer.Color;
+                CurrentPlayerLabel.Foreground = BrushHelper.GetBrush(currentPlayer.Color);
             }
             DiceResultText.Text = "-";
         }
@@ -218,7 +222,7 @@ namespace WpfApp1
             {
                 GameStatusText.Text = $"Ходит {nextPlayer.Name}";
                 CurrentPlayerLabel.Text = nextPlayer.Name;
-                CurrentPlayerLabel.Foreground = nextPlayer.Color;
+                CurrentPlayerLabel.Foreground = BrushHelper.GetBrush(nextPlayer.Color);
 
                 int finishedCount = gameController.FinishedPlayers.Count;
                 if (finishedCount > 0)
@@ -258,7 +262,7 @@ namespace WpfApp1
             Debug.WriteLine("Не финишировавшие игроки:");
             foreach (var player in gameController.Players)
             {
-                Debug.WriteLine(player);
+                var playerJSON = JsonSerializer.Serialize(player);
             }
 
             Debug.WriteLine("Финишировавшие игроки:");

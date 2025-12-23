@@ -26,6 +26,14 @@ namespace WpfApp1.Services
             Brushes.Orange
         };
 
+        private static readonly string[] PlayerColorsString =
+        {
+            "Red",
+            "Blue",
+            "Green",
+            "Orange"
+        };
+
         public bool IsGameActive => gameActive;
         public Player CurrentPlayer => GetNextActivePlayer();
         public Board GameBoard => gameBoard;
@@ -60,7 +68,7 @@ namespace WpfApp1.Services
             players = new List<Player>();
             for (int i = 0; i < playerCount; i++)
             {
-                players.Add(new Player($"Игрок {i + 1}", PlayerColors[i]));
+                players.Add(new Player($"Игрок {i + 1}", PlayerColorsString[i]));
             }
             currentPlayerIndex = 0;
             gameActive = true;

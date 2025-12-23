@@ -19,9 +19,9 @@ namespace WpfApp1
     {
         public int Position { get; set; }
         public string Name { get; set; }
-        public Brush Color { get; set; }
+        public string Color { get; set; }
 
-        public Player(string name, Brush color)
+        public Player(string name, string color)
         {
             Position = 0;
             Name = name;

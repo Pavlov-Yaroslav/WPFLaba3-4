@@ -145,7 +145,7 @@
                          Width="140" Height="40" Margin="5"
                          FontSize="14" FontWeight="SemiBold"
                          Background="#FF71B7E4"
-                         Click="SaveGame_Click"/>
+                         Click="SaveGame_Click" IsEnabled="False"/>
                     <Button x:Name="MainMenu" 
                          Content="Главное меню" 
                          Width="140" Height="40" Margin="5"
