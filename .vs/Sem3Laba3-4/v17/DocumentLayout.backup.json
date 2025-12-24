@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\service\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|solutionrelative:service\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|c:\\users\\ledok\\source\\repos\\sem3_laba3-4\\gamecore\\board.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|solutionrelative:gamecore\\board.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\gamecore\\boardgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|solutionrelative:gamecore\\boardgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\players\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -15,28 +23,28 @@
       "RelativeMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|solutionrelative:players\\effectfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\gamecore\\boardgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|solutionrelative:gamecore\\boardgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\cells\\cells.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|solutionrelative:cells\\cells.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|c:\\users\\ledok\\source\\repos\\sem3_laba3-4\\service\\gamesave.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|solutionrelative:service\\gamesave.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\gamecore\\dice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|solutionrelative:gamecore\\dice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\players\\iplayereffect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|solutionrelative:players\\iplayereffect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\gamecore\\board.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|solutionrelative:gamecore\\board.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\service\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|solutionrelative:service\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\service\\gamesave.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|solutionrelative:service\\gamesave.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\service\\saveservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|solutionrelative:service\\saveservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\service\\boardrenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -49,14 +57,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\service\\finishplayerinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|solutionrelative:service\\finishplayerinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\gamecore\\dice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|solutionrelative:gamecore\\dice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\cells\\cells.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|solutionrelative:cells\\cells.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}|Sem3Laba3-4.csproj|C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\startwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -106,11 +106,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 0,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "MainWindow.xaml.cs",
@@ -119,11 +119,12 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADcBAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-21T13:50:27.953Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Player.cs",
               "DocumentMoniker": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\Players\\Player.cs",
               "RelativeDocumentMoniker": "Players\\Player.cs",
@@ -132,21 +133,21 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-22T18:54:33.299Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "Board.cs",
               "DocumentMoniker": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\GameCore\\Board.cs",
               "RelativeDocumentMoniker": "GameCore\\Board.cs",
               "ToolTip": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\GameCore\\Board.cs",
               "RelativeToolTip": "GameCore\\Board.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAArwCoAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAswCAAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-22T18:59:17.729Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -158,7 +159,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "BoardGenerator.cs",
               "DocumentMoniker": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\GameCore\\BoardGenerator.cs",
               "RelativeDocumentMoniker": "GameCore\\BoardGenerator.cs",
@@ -166,37 +167,23 @@
               "RelativeToolTip": "GameCore\\BoardGenerator.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-23T11:00:59.022Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-23T11:00:59.022Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "IPlayerEffect.cs",
-              "DocumentMoniker": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\Players\\IPlayerEffect.cs",
-              "RelativeDocumentMoniker": "Players\\IPlayerEffect.cs",
-              "ToolTip": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\Players\\IPlayerEffect.cs",
-              "RelativeToolTip": "Players\\IPlayerEffect.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-23T17:08:59.338Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "EffectFactory.cs",
               "DocumentMoniker": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\Players\\EffectFactory.cs",
               "RelativeDocumentMoniker": "Players\\EffectFactory.cs",
               "ToolTip": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\Players\\EffectFactory.cs",
               "RelativeToolTip": "Players\\EffectFactory.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAArAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-23T21:30:34.84Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-23T21:30:34.84Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 8,
               "Title": "GameController.cs",
               "DocumentMoniker": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\Service\\GameController.cs",
               "RelativeDocumentMoniker": "Service\\GameController.cs",
@@ -204,25 +191,11 @@
               "RelativeToolTip": "Service\\GameController.cs",
               "ViewState": "AgIAAK8AAAAAAAAAAAAIwCwAAABaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-21T13:49:27.02Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-21T13:49:27.02Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "GameSave.cs",
-              "DocumentMoniker": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\Service\\GameSave.cs",
-              "RelativeDocumentMoniker": "Service\\GameSave.cs",
-              "ToolTip": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\Service\\GameSave.cs",
-              "RelativeToolTip": "Service\\GameSave.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-23T13:37:48.508Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "SaveService.cs",
               "DocumentMoniker": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\Service\\SaveService.cs",
               "RelativeDocumentMoniker": "Service\\SaveService.cs",
@@ -234,7 +207,55 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Dice.cs",
+              "DocumentMoniker": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\GameCore\\Dice.cs",
+              "RelativeDocumentMoniker": "GameCore\\Dice.cs",
+              "ToolTip": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\GameCore\\Dice.cs",
+              "RelativeToolTip": "GameCore\\Dice.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T18:54:46.219Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IPlayerEffect.cs",
+              "DocumentMoniker": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\Players\\IPlayerEffect.cs",
+              "RelativeDocumentMoniker": "Players\\IPlayerEffect.cs",
+              "ToolTip": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\Players\\IPlayerEffect.cs",
+              "RelativeToolTip": "Players\\IPlayerEffect.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-23T17:08:59.338Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Cells.cs",
+              "DocumentMoniker": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\Cells\\Cells.cs",
+              "RelativeDocumentMoniker": "Cells\\Cells.cs",
+              "ToolTip": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\Cells\\Cells.cs",
+              "RelativeToolTip": "Cells\\Cells.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAADwvzoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T18:52:36.349Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 9,
+              "Title": "GameSave.cs",
+              "DocumentMoniker": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\Service\\GameSave.cs",
+              "RelativeDocumentMoniker": "Service\\GameSave.cs",
+              "ToolTip": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\Service\\GameSave.cs",
+              "RelativeToolTip": "Service\\GameSave.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-23T13:37:48.508Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "BoardRenderer.cs",
               "DocumentMoniker": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\Service\\BoardRenderer.cs",
               "RelativeDocumentMoniker": "Service\\BoardRenderer.cs",
@@ -246,7 +267,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "DifficultySettings.cs",
               "DocumentMoniker": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\Settings\\DifficultySettings.cs",
               "RelativeDocumentMoniker": "Settings\\DifficultySettings.cs",
@@ -258,7 +279,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "FinishPlayerInfo.cs",
               "DocumentMoniker": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\Service\\FinishPlayerInfo.cs",
               "RelativeDocumentMoniker": "Service\\FinishPlayerInfo.cs",
@@ -267,30 +288,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-23T18:31:22.918Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Dice.cs",
-              "DocumentMoniker": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\GameCore\\Dice.cs",
-              "RelativeDocumentMoniker": "GameCore\\Dice.cs",
-              "ToolTip": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\GameCore\\Dice.cs",
-              "RelativeToolTip": "GameCore\\Dice.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-22T18:54:46.219Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "Cells.cs",
-              "DocumentMoniker": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\Cells\\Cells.cs",
-              "RelativeDocumentMoniker": "Cells\\Cells.cs",
-              "ToolTip": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\Cells\\Cells.cs",
-              "RelativeToolTip": "Cells\\Cells.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-22T18:52:36.349Z"
             },
             {
               "$type": "Document",
