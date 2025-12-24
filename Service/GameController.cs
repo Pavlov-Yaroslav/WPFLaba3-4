@@ -162,20 +162,54 @@ namespace WpfApp1.Services
             CurrentRound++;
         }
 
+
         private bool MakePlayerMove(Player player)
         {
-            if (!player.CanMove()) return false;
+            if (!player.CanMove())
+            {
+                player.CanMove();
+                return false;
+            }
 
             player.MoveBy(dice.Edge);
 
-            if (player.Position >= gameBoard.Size) return true;
+            if (player.Position >= gameBoard.Size)
+            {
+                player.Position = gameBoard.Size - 1;
+                return true;
+            }
+
+            if (player.Position < 0)
+            {
+                player.Position = 0;
+                return false;
+            }
 
             var cell = gameBoard.Cells[player.Position];
-            var result = cell?.Resolve();
-            if (result != null) player.ApplyCellResult(result);
+            if (cell != null)
+            {
+                var result = cell.Resolve();
+
+                player.Position += result.PositionDelta;
+
+                if (player.Position < 0)
+                    player.Position = 0;
+                if (player.Position >= gameBoard.Size)
+                {
+                    player.Position = gameBoard.Size - 1;
+                    return true;
+                }
+
+                foreach (var effect in result.Effects)
+                {
+                    player.AddEffect(effect);
+                }
+            }
 
             return player.Position >= gameBoard.Size;
         }
+
+
 
         private Player GetNextActivePlayer()
         {

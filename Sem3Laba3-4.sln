@@ -5,7 +5,7 @@ VisualStudioVersion = 17.14.36623.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sem3Laba3-4", "Sem3Laba3-4.csproj", "{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sem3_laba3-4.Tests", "..\sem3_laba3-4.Tests\sem3_laba3-4.Tests.csproj", "{E51C0523-C5FD-44B0-9FAC-7DEE9D0C5398}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sem3_laba3-4.Tests", "sem3_laba3-4.Tests\sem3_laba3-4.Tests.csproj", "{EC04E400-CC09-8911-9E21-783A9F3E0107}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{700BAAA7-CBE8-4409-BA3C-B8EE37D7F012}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E51C0523-C5FD-44B0-9FAC-7DEE9D0C5398}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E51C0523-C5FD-44B0-9FAC-7DEE9D0C5398}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E51C0523-C5FD-44B0-9FAC-7DEE9D0C5398}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E51C0523-C5FD-44B0-9FAC-7DEE9D0C5398}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC04E400-CC09-8911-9E21-783A9F3E0107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC04E400-CC09-8911-9E21-783A9F3E0107}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC04E400-CC09-8911-9E21-783A9F3E0107}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC04E400-CC09-8911-9E21-783A9F3E0107}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

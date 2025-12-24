@@ -1721,6 +1721,15 @@
         "build": {
           "build/net6.0/xunit.runner.visualstudio.props": {}
         }
+      },
+      "Sem3Laba3-4/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/Sem3Laba3-4.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Sem3Laba3-4.dll": {}
+        }
       }
     }
   },
@@ -5535,36 +5544,41 @@
         "xunit.runner.visualstudio.2.5.3.nupkg.sha512",
         "xunit.runner.visualstudio.nuspec"
       ]
+    },
+    "Sem3Laba3-4/1.0.0": {
+      "type": "project",
+      "path": "../Sem3Laba3-4.csproj",
+      "msbuildProject": "../Sem3Laba3-4.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\sem3_laba3-4\\Sem3Laba3-4.csproj",
       "FluentAssertions >= 8.8.0",
       "Microsoft.NET.Test.Sdk >= 17.8.0",
+      "Sem3Laba3-4 >= 1.0.0",
       "coverlet.collector >= 6.0.0",
       "xunit >= 2.5.3",
       "xunit.runner.visualstudio >= 2.5.3"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ledok\\.nuget\\packages\\": {},
+    "C:\\Users\\Ярослав\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\sem3_laba3-4.Tests\\sem3_laba3-4.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\Ярослав\\source\\repos\\Sem3Laba3-4\\sem3_laba3-4.Tests\\sem3_laba3-4.Tests.csproj",
       "projectName": "sem3_laba3-4.Tests",
-      "projectPath": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\sem3_laba3-4.Tests\\sem3_laba3-4.Tests.csproj",
-      "packagesPath": "C:\\Users\\ledok\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\sem3_laba3-4.Tests\\obj\\",
+      "projectPath": "C:\\Users\\Ярослав\\source\\repos\\Sem3Laba3-4\\sem3_laba3-4.Tests\\sem3_laba3-4.Tests.csproj",
+      "packagesPath": "C:\\Users\\Ярослав\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Ярослав\\source\\repos\\Sem3Laba3-4\\sem3_laba3-4.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\ledok\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Ярослав\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -5579,8 +5593,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\sem3_laba3-4\\Sem3Laba3-4.csproj": {
-              "projectPath": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\sem3_laba3-4\\Sem3Laba3-4.csproj"
+            "C:\\Users\\Ярослав\\source\\repos\\Sem3Laba3-4\\Sem3Laba3-4.csproj": {
+              "projectPath": "C:\\Users\\Ярослав\\source\\repos\\Sem3Laba3-4\\Sem3Laba3-4.csproj"
             }
           }
         }
@@ -5638,19 +5652,8 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1104",
-      "level": "Error",
-      "message": "Не удалось найти проект \"C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\sem3_laba3-4\\Sem3Laba3-4.csproj\". Убедитесь, что ссылка на проект действительна и файл проекта существует.",
-      "libraryId": "C:\\Users\\ledok\\source\\repos\\sem3_laba3-4\\sem3_laba3-4\\Sem3Laba3-4.csproj",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  }
 }
